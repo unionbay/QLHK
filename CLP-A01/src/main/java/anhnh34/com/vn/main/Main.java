@@ -10,7 +10,7 @@ import anhnh34.com.vn.model.SolutionMethod;
 
 public class Main {
 	public static void main(String args[]) {
-		// Configs log4j
+		// Config log4j
 		BasicConfigurator.configure();
 		ContainerLoading containerLoading = new ContainerLoading();
 		SolutionMethod solutionMethod = new SolutionMethod();
