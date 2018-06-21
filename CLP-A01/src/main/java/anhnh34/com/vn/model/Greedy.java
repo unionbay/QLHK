@@ -19,7 +19,7 @@ public class Greedy {
 	public static final String ST_ALGORITHM = "ST";
 	public static final String VL_ALGORITHM = "AL";
 	public static final String EL_ALGORITHM = "EL";
-	public static final double NOT_SUPPORT_RATIO= 0.25;
+	public static final double NOT_SUPPORT_RATIO= 0.34;
 
 	public void setContainer(Container container) {
 		this.container = container;

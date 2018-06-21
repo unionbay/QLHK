@@ -37,7 +37,7 @@ public class LoadingData {
 	public static void main(String arg[]) {
 		BasicConfigurator.configure();		
 		LoadingData loadingData = new LoadingData();
-		loadingData.loadingData(30, 40);
+		loadingData.loadingData(38, 45);
 	}
 
 	public void loadingData(int startIndex, int endIndex) {
