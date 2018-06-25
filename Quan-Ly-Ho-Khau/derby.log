@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Sun Mar 18 20:39:45 ICT 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): instance a816c00e-0162-3956-6112-00000c24d4b0 
+on database directory /home/anh-nguyen/workspace/Quan-Ly-Ho-Khau/MyDB with class loader sun.misc.Launcher$AppClassLoader@232204a1 
+Loaded from file:/home/anh-nguyen/Downloads/AAA/QLHK/db-derby-10.14.1.0-bin/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_151-8u151-b12-0ubuntu0.17.10.2-b12
+user.dir=/home/anh-nguyen/workspace/Quan-Ly-Ho-Khau
+os.name=Linux
+os.arch=amd64
+os.version=4.4.0-47-generic
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

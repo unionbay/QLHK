@@ -83,11 +83,8 @@ public class ContainerLoading {
 	public void loadingData() throws IOException {
 
 		Properties prop = new Properties();
-
 		prop.load(this.getClass().getClassLoader().getResourceAsStream("config.properties"));
-
 		String dataPath = prop.getProperty("data_path");
-
 		// load properties file
 		Path filePath = FileSystems.getDefault().getPath(dataPath);
 
@@ -103,10 +100,10 @@ public class ContainerLoading {
 
 		int index = 0;
 		for (String line : fileArray) {
-			if (line == null || line.isEmpty()) {
-				index++;
-				continue;
-			}
+//			if (line == null || line.isEmpty()) {
+//				index++;
+//				continue;
+//			}
 
 			line = line.trim();
 
@@ -119,77 +116,75 @@ public class ContainerLoading {
 			}
 
 			// Get number of customer.
-			if (index == 2) {
-				if (line.contains("number of customers")) {
-					String numCus = line.substring(0, line.indexOf('-')).trim();
-					int numberOfCustomer = Integer.parseInt(numCus);
-					problem.setNumOfCustomer(numberOfCustomer);
-				}
+			if (line.contains("number of customers")) {
+				String numCus = line.substring(0, line.indexOf('-')).trim();
+				int numberOfCustomer = Integer.parseInt(numCus);
+				problem.setNumOfCustomer(numberOfCustomer);
 			}
 
 			// get number of vehicles
-			if (index == 3) {
+			if (line.contains("number of vehicles")) {
 				problem.setNumOfVehicle(Integer.parseInt(line.substring(0, line.indexOf('-')).trim()));
 			}
 
 			// get number of items
-			if (index == 4) {
-				// problem.setNumOfItem(Integer.parseInt(line.substring(0,
-				// line.indexOf('-')).trim()));
+			if (line.contains("number of items")) {
+				 problem.setNumOfItem(Integer.parseInt(line.substring(0,
+				 line.indexOf('-')).trim()));
 			}
 
 			// get container info
-			if (index == 6) {
-				problem.setContainerInfo(line);
-				this.loadContainerInfo(line);
+			if (line.contains("Capacity - height - width - length of vehicles")) {
+				int i = fileArray.indexOf(line) + 1;				
+				problem.setContainerInfo(fileArray.get(i));
+				this.loadContainerInfo(fileArray.get(i));
 			}
 
+			// loading box information
 			if (line.contains("Node - number of items")) {
+				index = fileArray.indexOf(line);
 				problem.setItemsList(this.loadItems(index, fileArray));
 
 				// sort all boxes base on their volume
 				this.getNotPlacedBox().getBoxes().sort(new Comparator<Box>() {
-
 					@Override
 					public int compare(Box arg0, Box arg1) {
 						double arg0Volume = arg0.getLength() * arg0.getWidth() * arg0.getHeight();
 						double arg1Volume = arg1.getLength() * arg1.getWidth() * arg1.getHeight();
-						
-						//order by sequence number.
-//						if (arg0.getSequenceNumber() > arg1.getSequenceNumber()) {
-//							return -1;
-//						}
-//
-//						if (arg0.getSequenceNumber() < arg1.getSequenceNumber()) {
-//							return 1;
-//						}
-						
-					
-						
-						//order by  largest surface.
-//						if(arg1.getLargestSurface() >= arg0.getLargestSurface()) {
-//							return 1;							
-//						}
-//						
-//						if(arg1.getLargestSurface() < arg0.getLargestSurface()) {
-//							return -1;
-//						}
-													
+
+						// order by sequence number.
+						// if (arg0.getSequenceNumber() > arg1.getSequenceNumber()) {
+						// return -1;
+						// }
+						//
+						// if (arg0.getSequenceNumber() < arg1.getSequenceNumber()) {
+						// return 1;
+						// }
+
+						// order by largest surface.
+						// if(arg1.getLargestSurface() >= arg0.getLargestSurface()) {
+						// return 1;
+						// }
+						//
+						// if(arg1.getLargestSurface() < arg0.getLargestSurface()) {
+						// return -1;
+						// }
+
 						if (arg1Volume > arg0Volume) {
 							return 1;
 						} else if (arg1Volume < arg0Volume) {
 							return -1;
-						} 
-						
-						//order by largest dimension.
-						if(arg1.getBiggestDimension() > arg0.getBiggestDimension()) {
-							return 1;							
 						}
-					
-						if(arg1.getBiggestDimension() < arg0.getBiggestDimension()) {
+
+						// order by largest dimension.
+						if (arg1.getBiggestDimension() > arg0.getBiggestDimension()) {
+							return 1;
+						}
+
+						if (arg1.getBiggestDimension() < arg0.getBiggestDimension()) {
 							return -1;
 						}
-						
+
 						return 0;
 					}
 				});
@@ -200,18 +195,18 @@ public class ContainerLoading {
 	}
 
 	private List<String> loadItems(int index, List<String> itemList) {
-		// get all items in this class
 
+		// get all items in this class
 		List<String> subItemList = itemList.subList(index + 1, itemList.size());
 		for (String item : subItemList) {
 			item = item.trim();
-		
-			//check if item not  actived, skip read current line.
-			if( ! item.contains("x")) {
+
+			// check if item not actived, skip read current line.
+			if (!item.contains("x")) {
 				continue;
 			}
-			
-			String[] itemArray = item.split("\\s+");			
+
+			String[] itemArray = item.split("\\s+");
 			this.createItem(itemArray);
 		}
 
@@ -259,8 +254,8 @@ public class ContainerLoading {
 		container.setCapacity(Integer.parseInt(conInfoString[index]));
 		container.setHeight(Double.parseDouble(conInfoString[++index]));
 		container.setWidth(Double.parseDouble(conInfoString[++index]));
-		container.setLength(Double.parseDouble(conInfoString[++index]));		
-		
+		container.setLength(Double.parseDouble(conInfoString[++index]));
+
 		// setup default space;
 		container.loadingSpace();
 	}
@@ -759,7 +754,6 @@ public class ContainerLoading {
 
 	private void readNodeInfo(List<String> fileContent) {
 		int startIndex = 9;
-
 		while (startIndex < fileContent.size()) {
 			String lineData = fileContent.get(startIndex);
 			if (lineData.contains("Node - number of items")) {

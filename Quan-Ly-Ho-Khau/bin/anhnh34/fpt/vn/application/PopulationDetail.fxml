@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="anhnh34.fpt.vn.controller.PopulationDetaiLController">
+	<children>
+		<GridPane>
+			<columnConstraints>
+				<ColumnConstraints hgrow="SOMETIMES" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+			</rowConstraints>
+			<children>
+				<TableView fx:id="tbvPopulation" minHeight="600.0" minWidth="1000.0">
+					<columns>
+						<TableColumn fx:id="clChuHo" minWidth="200.0" prefWidth="200.0" text="Chủ hộ" />
+						<TableColumn fx:id="clHo" maxWidth="59.0" minWidth="31.0" prefWidth="42.0" text="Hộ" />
+						<TableColumn fx:id="clNgoaiTinh" maxWidth="136.0" minWidth="89.0" prefWidth="89.0" text="Ngoài tỉnh" />
+						<TableColumn fx:id="clTenDayDu" minWidth="100.0" prefWidth="172.0" text="Người được giải quyết" />
+		                <TableColumn fx:id="clSex" minWidth="70.0" prefWidth="82.0" text="Giới Tính" />
+                  		<TableColumn fx:id="clBirthday" minWidth="70.0" prefWidth="134.0" text="Năm sinh" />
+                  <TableColumn fx:id="clDistrict" minWidth="93.0" prefWidth="154.0" text="Địa chỉ/ Hồ sơ số" />
+						<TableColumn fx:id="clDiaChi" minWidth="93.0" prefWidth="154.0" text="Địa chỉ/ Hồ sơ số" />
+						<TableColumn fx:id="clTruongHopNhap" maxWidth="179.0" minWidth="129.0" prefWidth="148.0" text="Trường hợp nhập" />
+						<TableColumn fx:id="clNoiDung" maxWidth="180.0" minWidth="151.0" prefWidth="155.0" text="Nội dung giải quyết" />
+					</columns>
+				</TableView>
+				<Button fx:id="btnDelete" mnemonicParsing="false" onAction="#onDeleteClick" prefHeight="26.0" prefWidth="82.0" text="Xóa" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+					<GridPane.margin>
+						<Insets right="20.0" />
+					</GridPane.margin>
+				</Button>
+			</children>
+		</GridPane>
+	</children>
+</AnchorPane>
